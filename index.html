@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="NT" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
-  <!-- Green NT App Icon for Mobile & Browsers -->
+  <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%23121212'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' fill='%234caf50' font-family='sans-serif' font-weight='bold' font-size='260'>NT</text></svg>" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%23121212'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' fill='%234caf50' font-family='sans-serif' font-weight='bold' font-size='260'>NT</text></svg>" />
 
@@ -19,52 +19,75 @@
 
   <!-- Top App Bar -->
   <header class="app-header">
-    <h1 id="screen-title">Dashboard</h1>
+    <div class="header-left">
+      <span class="app-logo-text">NT</span>
+      <h1 id="screen-title">Dashboard</h1>
+    </div>
     <div class="date-picker-container">
       <input type="date" id="active-date" />
     </div>
   </header>
 
-  <!-- Main Content Container -->
   <main class="main-container">
 
     <!-- DASHBOARD TAB -->
     <section id="tab-dash" class="tab-content active-tab">
       
-      <!-- Greeting Banner -->
-      <div style="margin-bottom: 12px;">
-        <h2 id="user-greeting" style="font-size: 1.3rem; font-weight: 600;">Welcome!</h2>
+      <div class="greeting-banner">
+        <h2 id="user-greeting">Welcome!</h2>
+        <p class="sub-text">Here is your daily summary</p>
       </div>
 
-      <!-- Calorie & Macro Card -->
-      <div class="card">
-        <h3>Daily Nutrition Overview</h3>
-        <div class="stat-main">
-          <span id="logged-cals">0</span> / <span id="target-cals">2000</span> <small>kcal</small>
+      <!-- MyFitnessPal Style Calorie Equation Card -->
+      <div class="card mfp-card">
+        <h3>Calories Remaining</h3>
+        <div class="mfp-equation">
+          <div class="eq-box">
+            <span class="eq-num" id="target-cals">2000</span>
+            <span class="eq-label">Goal</span>
+          </div>
+          <span class="eq-op">-</span>
+          <div class="eq-box">
+            <span class="eq-num" id="logged-cals">0</span>
+            <span class="eq-label">Food</span>
+          </div>
+          <span class="eq-op">=</span>
+          <div class="eq-box highlight">
+            <span class="eq-num" id="remaining-cals">2000</span>
+            <span class="eq-label">Remaining</span>
+          </div>
         </div>
+
         <div class="progress-bar-bg">
           <div id="cal-progress" class="progress-bar-fill" style="width: 0%;"></div>
         </div>
+      </div>
 
+      <!-- Macros Card -->
+      <div class="card">
+        <h3>Macronutrients</h3>
         <div class="macro-grid">
           <div class="macro-box">
-            <span class="macro-label">Protein</span>
-            <div class="macro-val"><span id="logged-protein">0</span>/<span id="target-protein">120</span>g</div>
+            <span class="macro-label">Carbs</span>
+            <div class="macro-val"><span id="logged-carbs">0</span> / <span id="target-carbs">250</span>g</div>
+            <div class="mini-bar-bg"><div id="carbs-bar" class="mini-bar-fill carbs-color" style="width: 0%;"></div></div>
           </div>
           <div class="macro-box">
-            <span class="macro-label">Carbs</span>
-            <div class="macro-val"><span id="logged-carbs">0</span>/<span id="target-carbs">250</span>g</div>
+            <span class="macro-label">Protein</span>
+            <div class="macro-val"><span id="logged-protein">0</span> / <span id="target-protein">120</span>g</div>
+            <div class="mini-bar-bg"><div id="protein-bar" class="mini-bar-fill protein-color" style="width: 0%;"></div></div>
           </div>
           <div class="macro-box">
             <span class="macro-label">Fats</span>
-            <div class="macro-val"><span id="logged-fats">0</span>/<span id="target-fats">55</span>g</div>
+            <div class="macro-val"><span id="logged-fats">0</span> / <span id="target-fats">55</span>g</div>
+            <div class="mini-bar-bg"><div id="fats-bar" class="mini-bar-fill fats-color" style="width: 0%;"></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Water Tracker Card -->
+      <!-- Water Tracker -->
       <div class="card">
-        <h3>💧 Water Intake</h3>
+        <h3>💧 Water Tracker</h3>
         <div class="stat-main">
           <span id="logged-water">0</span> / <span>3000</span> <small>ml</small>
         </div>
@@ -78,48 +101,49 @@
         </div>
       </div>
 
-      <!-- Today's Logged Items Card -->
-      <div class="card">
-        <h3>Today's Meals</h3>
-        <ul id="today-logged-list" class="food-list">
-          <p class="placeholder-text">No foods logged for today yet.</p>
-        </ul>
-      </div>
-
     </section>
 
-    <!-- LOG / FOOD LIBRARY TAB -->
+    <!-- DIARY / MEALS TAB (MyFitnessPal Style) -->
     <section id="tab-log" class="tab-content">
       
-      <!-- Search & Select Preloaded Foods -->
-      <div class="card">
-        <h3>Food Library</h3>
-        <div class="search-box">
-          <input type="text" id="food-search-input" placeholder="Search roti, eggs, chicken..." />
-          <button id="search-btn" class="btn-primary">Search</button>
+      <!-- Breakfast -->
+      <div class="card meal-card">
+        <div class="meal-header">
+          <h3>🌅 Breakfast</h3>
+          <span class="meal-total-cals" id="cals-breakfast">0 kcal</span>
         </div>
-        <div id="food-library-list" class="food-list-scrollable"></div>
+        <ul id="list-breakfast" class="food-list"></ul>
+        <button class="add-meal-btn" onclick="openAddFoodModal('Breakfast')">+ Add Food</button>
       </div>
 
-      <!-- Add Custom Food -->
-      <div class="card">
-        <h3>Add Custom Food Entry</h3>
-        <div class="form-group">
-          <input type="text" id="custom-name" placeholder="Food Name (e.g. Homemade Smoothie)" />
+      <!-- Lunch -->
+      <div class="card meal-card">
+        <div class="meal-header">
+          <h3>☀️ Lunch</h3>
+          <span class="meal-total-cals" id="cals-lunch">0 kcal</span>
         </div>
-        <div class="form-row">
-          <input type="number" id="custom-cals" placeholder="Calories" />
-          <input type="number" id="custom-protein" placeholder="Protein (g)" />
+        <ul id="list-lunch" class="food-list"></ul>
+        <button class="add-meal-btn" onclick="openAddFoodModal('Lunch')">+ Add Food</button>
+      </div>
+
+      <!-- Dinner -->
+      <div class="card meal-card">
+        <div class="meal-header">
+          <h3>🌙 Dinner</h3>
+          <span class="meal-total-cals" id="cals-dinner">0 kcal</span>
         </div>
-        <div class="form-row">
-          <input type="number" id="custom-carbs" placeholder="Carbs (g)" />
-          <input type="number" id="custom-fats" placeholder="Fats (g)" />
+        <ul id="list-dinner" class="food-list"></ul>
+        <button class="add-meal-btn" onclick="openAddFoodModal('Dinner')">+ Add Food</button>
+      </div>
+
+      <!-- Snacks -->
+      <div class="card meal-card">
+        <div class="meal-header">
+          <h3>🍎 Snacks</h3>
+          <span class="meal-total-cals" id="cals-snacks">0 kcal</span>
         </div>
-        <div class="checkbox-group">
-          <input type="checkbox" id="custom-save-lib" />
-          <label for="custom-save-lib">Save to my Library for quick re-use</label>
-        </div>
-        <button id="add-custom-btn" class="btn-primary btn-block">Log Custom Food</button>
+        <ul id="list-snacks" class="food-list"></ul>
+        <button class="add-meal-btn" onclick="openAddFoodModal('Snacks')">+ Add Food</button>
       </div>
 
     </section>
@@ -127,33 +151,61 @@
     <!-- HISTORY TAB -->
     <section id="tab-history" class="tab-content">
       <div class="card">
-        <h3>Past Days Log</h3>
+        <h3>Log History</h3>
         <div id="history-container">
           <p class="placeholder-text">No previous logs found.</p>
         </div>
       </div>
     </section>
 
-    <!-- GOALS / SETTINGS TAB -->
+    <!-- GOALS & PROFILE TAB -->
     <section id="tab-goals" class="tab-content">
       <div class="card">
-        <h3>Your Goal Settings</h3>
-        <p style="font-size:0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
-          Recalculate your recommended daily calorie and protein targets.
-        </p>
-        <button id="reopen-onboarding-btn" class="btn-primary btn-block">Recalculate Daily Goals</button>
+        <h3>Profile & Goal Settings</h3>
+        <p class="sub-text" style="margin-bottom: 15px;">Recalculate your daily calories & macros.</p>
+        <button id="reopen-onboarding-btn" class="btn-primary btn-block">Edit Profile & Goals</button>
       </div>
     </section>
 
   </main>
 
+  <!-- ADD FOOD MODAL -->
+  <div id="food-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-meal-title">Add Food</h3>
+        <button class="close-btn" onclick="closeFoodModal()">✕</button>
+      </div>
+
+      <div class="search-box">
+        <input type="text" id="food-search-input" placeholder="Search roti, rice, eggs..." />
+      </div>
+      
+      <div id="food-library-list" class="food-list-scrollable"></div>
+
+      <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;" />
+
+      <h4>Or Add Custom Food</h4>
+      <div class="form-group">
+        <input type="text" id="custom-name" placeholder="Food Name" />
+      </div>
+      <div class="form-row">
+        <input type="number" id="custom-cals" placeholder="Calories" />
+        <input type="number" id="custom-protein" placeholder="Protein (g)" />
+      </div>
+      <div class="form-row">
+        <input type="number" id="custom-carbs" placeholder="Carbs (g)" />
+        <input type="number" id="custom-fats" placeholder="Fats (g)" />
+      </div>
+      <button id="add-custom-btn" class="btn-primary btn-block" style="margin-top: 10px;">Log Custom Food</button>
+    </div>
+  </div>
+
   <!-- ONBOARDING MODAL -->
   <div id="onboarding-modal" class="modal-overlay hidden">
     <div class="modal-card">
-      <h2>Welcome! Set Your Goals</h2>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">
-        Let's calculate your daily nutrition targets.
-      </p>
+      <h2>Welcome to NT</h2>
+      <p class="sub-text" style="margin-bottom: 15px;">Let's setup your daily goal profile.</p>
 
       <div class="form-group">
         <label>Your Name</label>
@@ -203,7 +255,7 @@
         </select>
       </div>
 
-      <button id="save-onboarding-btn" class="btn-primary btn-block">Save & Get Started</button>
+      <button id="save-onboarding-btn" class="btn-primary btn-block">Save Goals</button>
     </div>
   </div>
 
@@ -211,19 +263,19 @@
   <nav class="bottom-nav">
     <button class="nav-btn active" data-tab="tab-dash">
       <span class="nav-icon">📊</span>
-      <span class="nav-label">Dash</span>
+      <span class="nav-label">Dashboard</span>
     </button>
     <button class="nav-btn" data-tab="tab-log">
-      <span class="nav-icon">🍎</span>
-      <span class="nav-label">Food</span>
+      <span class="nav-icon">📖</span>
+      <span class="nav-label">Diary</span>
     </button>
     <button class="nav-btn" data-tab="tab-history">
       <span class="nav-icon">📅</span>
       <span class="nav-label">History</span>
     </button>
     <button class="nav-btn" data-tab="tab-goals">
-      <span class="nav-icon">⚙️</span>
-      <span class="nav-label">Goals</span>
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Me</span>
     </button>
   </nav>
 
