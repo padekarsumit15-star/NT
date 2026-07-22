@@ -5,14 +5,88 @@ document.addEventListener("DOMContentLoaded", function () {
     FOOD_LIB: "nt_food_lib"
   };
 
+  // 67 Indian Foods Library
   const defaultFoodLibrary = [
+    // --- STAPLES & GRAINS ---
     { name: "Roti / Chapati (1 pc)", calories: 100, protein: 3, carbs: 18, fats: 2 },
-    { name: "Cooked White Rice (1 bowl)", calories: 150, protein: 3, carbs: 33, fats: 0.5 },
+    { name: "Butter Roti / Paratha (1 pc)", calories: 150, protein: 3.5, carbs: 20, fats: 6 },
+    { name: "Aloo Paratha (1 pc)", calories: 290, protein: 6, carbs: 42, fats: 11 },
+    { name: "Cooked White Rice (1 bowl / 150g)", calories: 195, protein: 3.8, carbs: 43, fats: 0.5 },
+    { name: "Cooked Brown Rice (1 bowl / 150g)", calories: 168, protein: 3.8, carbs: 36, fats: 1.4 },
+    { name: "Jeera Rice (1 bowl)", calories: 210, protein: 4, carbs: 44, fats: 2.5 },
+    { name: "Veg Biryani (1 plate)", calories: 320, protein: 6.5, carbs: 52, fats: 9.5 },
+    { name: "Chicken Biryani (1 plate)", calories: 450, protein: 28, carbs: 54, fats: 14 },
+    { name: "Naan (1 pc)", calories: 260, protein: 7.5, carbs: 45, fats: 5 },
+    { name: "Bhakri (Jowar/Bajra, 1 pc)", calories: 140, protein: 3.5, carbs: 28, fats: 1.5 },
+
+    // --- DALS & KATHOL ---
+    { name: "Toor Dal (1 bowl)", calories: 140, protein: 8, carbs: 20, fats: 3 },
+    { name: "Moong Dal (1 bowl)", calories: 120, protein: 7.5, carbs: 18, fats: 2 },
+    { name: "Chana Dal (1 bowl)", calories: 160, protein: 9, carbs: 24, fats: 3 },
+    { name: "Dal Tadka (1 bowl)", calories: 175, protein: 8, carbs: 21, fats: 6.5 },
+    { name: "Dal Makhani (1 bowl)", calories: 260, protein: 9, carbs: 26, fats: 13.5 },
+    { name: "Rajma Masala (1 bowl)", calories: 210, protein: 11, carbs: 32, fats: 4 },
+    { name: "Chole / Chana Masala (1 bowl)", calories: 230, protein: 11.5, carbs: 34, fats: 5 },
+    { name: "Usal / Misal Curry (1 bowl)", calories: 180, protein: 9.5, carbs: 25, fats: 5 },
+    { name: "Kadhi (1 bowl)", calories: 130, protein: 4, carbs: 12, fats: 7 },
+
+    // --- VEGETABLE BHAJIS & CURRIES ---
+    { name: "Batata Bhaji / Potato Curry (1 bowl)", calories: 170, protein: 3, carbs: 26, fats: 6 },
+    { name: "Bhindi Masala (1 bowl)", calories: 130, protein: 2.5, carbs: 12, fats: 8 },
+    { name: "Palak Paneer (1 bowl)", calories: 280, protein: 14, carbs: 10, fats: 20 },
+    { name: "Paneer Butter Masala (1 bowl)", calories: 340, protein: 13, carbs: 14, fats: 26 },
+    { name: "Aloo Gobi (1 bowl)", calories: 150, protein: 3.5, carbs: 20, fats: 6.5 },
+    { name: "Mix Veg Curry (1 bowl)", calories: 140, protein: 3.5, carbs: 16, fats: 7 },
+    { name: "Baingan Bharta (1 bowl)", calories: 125, protein: 2.5, carbs: 12, fats: 7.5 },
+    { name: "Methi Bhaji (1 bowl)", calories: 110, protein: 3, carbs: 9, fats: 6.5 },
+    { name: "Shev Bhaji (1 bowl)", calories: 290, protein: 7, carbs: 22, fats: 19 },
+    { name: "Soyabean Curry (1 bowl)", calories: 220, protein: 18, carbs: 14, fats: 10 },
+
+    // --- PROTEINS (NON-VEG & EGGS) ---
     { name: "Boiled Egg (1 large)", calories: 78, protein: 6.3, carbs: 0.6, fats: 5.3 },
-    { name: "Chicken Breast (100g cooked)", calories: 165, protein: 31, carbs: 0, fats: 3.6 },
-    { name: "Paneer / Cottage Cheese (100g)", calories: 265, protein: 18, carbs: 1.2, fats: 20 },
-    { name: "Dal / Lentil Soup (1 bowl)", calories: 120, protein: 7, carbs: 18, fats: 2.5 },
-    { name: "Banana (1 medium)", calories: 105, protein: 1.3, carbs: 27, fats: 0.3 }
+    { name: "Egg Omelette (2 eggs, oil)", calories: 210, protein: 13, carbs: 2, fats: 16 },
+    { name: "Egg Bhurji (2 eggs)", calories: 230, protein: 14, carbs: 4, fats: 17 },
+    { name: "Chicken Breast (Cooked 100g)", calories: 165, protein: 31, carbs: 0, fats: 3.6 },
+    { name: "Chicken Curry (1 bowl)", calories: 270, protein: 24, carbs: 8, fats: 16 },
+    { name: "Chicken Fry (100g)", calories: 240, protein: 26, carbs: 3, fats: 13 },
+    { name: "Egg Curry (2 eggs)", calories: 260, protein: 15, carbs: 7, fats: 18 },
+    { name: "Fish Fry (1 piece)", calories: 210, protein: 20, carbs: 5, fats: 12 },
+    { name: "Fish Curry (1 bowl)", calories: 230, protein: 22, carbs: 6, fats: 13 },
+    { name: "Mutton Curry (1 bowl)", calories: 360, protein: 26, carbs: 6, fats: 25 },
+
+    // --- DAIRY & SUPPLEMENTS ---
+    { name: "Whole Milk (1 glass / 250ml)", calories: 150, protein: 8, carbs: 12, fats: 8 },
+    { name: "Skimmed Milk (1 glass / 250ml)", calories: 90, protein: 8.5, carbs: 12, fats: 0.5 },
+    { name: "Curd / Dahi (1 cup / 150g)", calories: 100, protein: 5, carbs: 7, fats: 6 },
+    { name: "Paneer (Raw 100g)", calories: 265, protein: 18, carbs: 1.2, fats: 20 },
+    { name: "Whey Protein (1 scoop / 30g)", calories: 120, protein: 24, carbs: 2, fats: 1.5 },
+    { name: "Buttermilk / Taak (1 glass)", calories: 45, protein: 2, carbs: 4, fats: 2 },
+    { name: "Greek Yogurt (100g)", calories: 97, protein: 9, carbs: 4, fats: 5 },
+
+    // --- BREAKFAST & SNACKS ---
+    { name: "Poha (1 plate)", calories: 220, protein: 4, carbs: 42, fats: 5 },
+    { name: "Upma (1 plate)", calories: 210, protein: 4.5, carbs: 38, fats: 5 },
+    { name: "Idli (2 pcs with Chutney)", calories: 150, protein: 4, carbs: 30, fats: 1.5 },
+    { name: "Meda Vada (2 pcs)", calories: 290, protein: 6, carbs: 32, fats: 15 },
+    { name: "Dosa (Plain, 1 pc)", calories: 170, protein: 3.5, carbs: 29, fats: 4.5 },
+    { name: "Masala Dosa (1 pc)", calories: 310, protein: 5.5, carbs: 46, fats: 11 },
+    { name: "Samosa (1 pc)", calories: 260, protein: 4, carbs: 32, fats: 13 },
+    { name: "Vada Pav (1 pc)", calories: 290, protein: 5, carbs: 38, fats: 13 },
+    { name: "Sprouted Moong Salad (1 bowl)", calories: 120, protein: 8, carbs: 20, fats: 1 },
+    { name: "Peanut Butter (2 tbsp / 32g)", calories: 190, protein: 8, carbs: 7, fats: 16 },
+    { name: "Roasted Chana (1 handful / 30g)", calories: 120, protein: 6, carbs: 18, fats: 2 },
+
+    // --- FRUITS & NUTS ---
+    { name: "Banana (1 medium)", calories: 105, protein: 1.3, carbs: 27, fats: 0.3 },
+    { name: "Apple (1 medium)", calories: 95, protein: 0.5, carbs: 25, fats: 0.3 },
+    { name: "Almonds / Badam (10 pcs)", calories: 70, protein: 2.5, carbs: 2.5, fats: 6 },
+    { name: "Walnuts / Akhrot (5 pcs)", calories: 130, protein: 3, carbs: 3, fats: 13 },
+    { name: "Cashews / Kaju (10 pcs)", calories: 90, protein: 2.5, carbs: 5, fats: 7 },
+    { name: "Dates / Khajur (3 pcs)", calories: 66, protein: 0.5, carbs: 18, fats: 0 },
+    { name: "Oats with Milk (1 bowl)", calories: 270, protein: 11, carbs: 42, fats: 6 },
+    { name: "Mango (1 medium)", calories: 135, protein: 1, carbs: 35, fats: 0.5 },
+    { name: "Papaya (1 bowl / 150g)", calories: 60, protein: 0.8, carbs: 15, fats: 0.2 },
+    { name: "Guava / Amrood (1 medium)", calories: 68, protein: 2.6, carbs: 14, fats: 1 }
   ];
 
   let activeDate = new Date().toISOString().split("T")[0];
@@ -20,7 +94,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let userGoals = JSON.parse(localStorage.getItem(KEYS.USER_GOALS)) || null;
   let dailyHistory = JSON.parse(localStorage.getItem(KEYS.DAILY_LOGS)) || {};
-  let foodLibrary = JSON.parse(localStorage.getItem(KEYS.FOOD_LIB)) || defaultFoodLibrary;
+  
+  // Ensure the library defaults to full list if saved library is outdated
+  let foodLibrary = JSON.parse(localStorage.getItem(KEYS.FOOD_LIB));
+  if (!foodLibrary || foodLibrary.length < defaultFoodLibrary.length) {
+    foodLibrary = defaultFoodLibrary;
+    localStorage.setItem(KEYS.FOOD_LIB, JSON.stringify(foodLibrary));
+  }
 
   const activeDateInput = document.getElementById("active-date");
   if (activeDateInput) {
@@ -134,7 +214,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!container) return;
     container.innerHTML = "";
 
-    items.forEach((item, index) => {
+    items.forEach((item) => {
+      const originalIndex = foodLibrary.indexOf(item);
       const div = document.createElement("div");
       div.className = "food-item";
       div.innerHTML = `
@@ -142,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <h5>${item.name}</h5>
           <p>${item.calories} kcal | P:${item.protein}g C:${item.carbs}g F:${item.fats}g</p>
         </div>
-        <button class="btn-sm" onclick="logSelectedFood(${index})">+ Log</button>
+        <button class="btn-sm" onclick="logSelectedFood(${originalIndex})">+ Log</button>
       `;
       container.appendChild(div);
     });
@@ -169,12 +250,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!name) { alert("Please enter a food name"); return; }
 
-      const newFood = { name: name, calories: cals, protein: protein, carbs: carbs, fats: fats, meal: currentAddingMeal };
+      const newFood = { name: name, calories: cals, protein: protein, carbs: carbs, fats: fats };
       foodLibrary.unshift(newFood);
       localStorage.setItem(KEYS.FOOD_LIB, JSON.stringify(foodLibrary));
 
       const data = getActiveDateData();
-      data.foods.push(newFood);
+      data.foods.push({ ...newFood, meal: currentAddingMeal });
       saveDailyHistory();
 
       document.getElementById("custom-name").value = "";
@@ -258,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (calsLabel) calsLabel.textContent = Math.round(totalMealCals) + " kcal";
 
-      mealFoods.forEach((item, idx) => {
+      mealFoods.forEach((item) => {
         const globalIndex = foods.indexOf(item);
         const li = document.createElement("li");
         li.className = "food-item";
